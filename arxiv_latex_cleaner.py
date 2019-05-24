@@ -168,8 +168,8 @@ def _keep_only_referenced(filenames, container_files):
 
     for fn in filenames:
       if os.path.splitext(fn)[0] in data:
+        print(fn, container)
         referenced.add(fn)
-
   return referenced
 
 
@@ -253,10 +253,11 @@ def _run_arxiv_cleaner(parameters):
 
   parameters['output_folder'] = _create_out_folder(parameters['input_folder'])
 
-  for non_tex_file in splits['non_tex']:
-    _copy_file(non_tex_file, parameters)
   for tex_file in splits['tex']:
     _read_remove_comments_and_write_file(tex_file, parameters)
+
+  for non_tex_file in splits['non_tex']:
+    _copy_file(non_tex_file, parameters)
 
   _resize_and_copy_figures(parameters, splits)
 
